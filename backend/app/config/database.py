@@ -53,7 +53,7 @@ def create_easy_level():
             ),
             CodeLine(
                 line_number=5,
-                is_modified = False,
+                is_modified = True,
                 is_correct = False,
                 versions=[
                     CodeVersion(id=1, code="    sum_value = f + y"),
@@ -72,7 +72,7 @@ def create_easy_level():
             ),
             CodeLine(
                 line_number=7,
-                is_modified = False,
+                is_modified = True,
                 is_correct = False,
                 versions=[
                     CodeVersion(id=1, code="    if product_value > 20:"),

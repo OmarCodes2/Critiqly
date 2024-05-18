@@ -23,6 +23,9 @@ async def user_interaction(response: UserInteraction):
     correct = str_to_bool(correct)
     coworker = coworker_response(correct)
     new_code = code_modification(line_no, code, correct)
+    
+    if code.mistakes_found == code.number_of_mistakes:
+        return {"response": get_openai_response("You are the coworker of a user who is doing a code review on your code,  the user has found all the mistakes in the code. Congratulate them on their good work"), "code": new_code}
 
     return {"response": coworker, "code": new_code}
 
