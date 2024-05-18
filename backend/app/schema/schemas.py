@@ -15,6 +15,8 @@ def individual_seriallevel(level) -> dict:
     return {
         "id": str(level["_id"]),
         "difficulty": level["difficulty"],
+        "number_of_mistakes": level["number_of_mistakes"],
+        "mistakes_found": level["mistakes_found"],
         "lines": [serialize_code_line(line) for line in level["lines"]],
         "readme": level.get("readme")
     }

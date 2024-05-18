@@ -1,26 +1,34 @@
 from fastapi import APIRouter, HTTPException, status
-from app.models.levels import Level
+from app.models.levels import Level, UserInteraction
 from app.models.signIn import SignInRequest
-from app.config.database import levels, users, create_base_level, create_easy_level
+from app.config.database import levels, users,create_easy_level
+from app.routes.openai_query import *
 from app.schema.schemas import *
 from bson import ObjectId
 import bcrypt
 
 router = APIRouter()
 
+def str_to_bool(s):
+    return s.lower() == 'true'
 
-# POST Request to Insert Base Level
-@router.post("/InsertBaseLevel")
-async def insert_base_level():
-    base_level = create_base_level()
-    # Check if the base level already exists
-    if not levels.find_one({"difficulty": "base"}):
-        # Insert the base level
-        levels.insert_one(base_level)
-        return {"message": "Base level inserted."}
-    else:
-        return {"message": "Base level already exists skipping insertion."}
+@router.post("/UserInteraction")
+async def user_interaction(response: UserInteraction):
+    code = response.code
+    user_input = response.user_input
+
+    line_no = line_number(user_input)
+    line_code = parse_with_line_number(line_no, code)
+    correct = determine_correctness(line_code, user_input)
+    correct = str_to_bool(correct)
+    coworker = coworker_response(correct)
+    new_code = code_modification(line_no, code, correct)
     
+    if code.mistakes_found == code.number_of_mistakes:
+        return {"response": get_openai_response("You are the coworker of a user who is doing a code review on your code,  the user has found all the mistakes in the code. Congratulate them on their good work"), "code": new_code}
+
+    return {"response": coworker, "code": new_code}
+
 # POST Request to Insert Easy Level
 @router.post("/InsertEasyLevel")
 async def insert_easy_level():
