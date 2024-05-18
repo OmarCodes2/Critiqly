@@ -44,8 +44,8 @@ async def insert_base_level():
     
 #GET Request Method
 @router.get("/LoadLevel")
-async def get_levels():
-    levelstest = list_seriallevels(levels.find()) #find everything incollection and return
+async def get_levels(difficulty: str):
+    levelstest = list_seriallevels(levels.find({"difficulty": difficulty})) #find everything incollection and return
     return levelstest
 
 @router.post("/signin")
