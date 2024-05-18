@@ -50,9 +50,11 @@ jobs:
       run: npm install -g @aws-amplify/cli
 
     - name: Initialize Amplify
+      working-directory: ./frontend
       run: amplify pull --app-id $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH_NAME --yes
 
     - name: Deploy React app to Amplify
+      working-directory: ./frontend
       run: amplify publish --yes
 
     - name: Set up Python
