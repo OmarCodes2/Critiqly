@@ -46,6 +46,9 @@ jobs:
     - name: Upload React build to S3
       run: aws s3 sync ./frontend/build s3://$S3_BUCKET/ --delete
 
+    - name: Install Amplify CLI
+      run: npm install -g @aws-amplify/cli
+
     - name: Deploy React app to Amplify
       run: amplify publish --app-id $AMPLIFY_APP_ID --branch-name $AMPLIFY_BRANCH_NAME --yes
 
