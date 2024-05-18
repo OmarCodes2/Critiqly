@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 from app.models.levels import Level
 from app.models.signIn import SignInRequest
-from app.config.database import levels, users, create_base_level
+from app.config.database import levels, users, create_base_level, create_easy_level
 from app.schema.schemas import *
 from bson import ObjectId
 import bcrypt
@@ -20,6 +20,18 @@ async def insert_base_level():
         return {"message": "Base level inserted."}
     else:
         return {"message": "Base level already exists skipping insertion."}
+    
+# POST Request to Insert Easy Level
+@router.post("/InsertEasyLevel")
+async def insert_easy_level():
+    easy_level = create_easy_level()
+    # Check if the base level already exists
+    if not levels.find_one({"difficulty": "easy"}):
+        # Insert the base level
+        levels.insert_one(easy_level)
+        return {"message": "Easy level inserted."}
+    else:
+        return {"message": "Easy level already exists skipping insertion."}
     
 #GET Request Method
 @router.get("/LoadLevel")
