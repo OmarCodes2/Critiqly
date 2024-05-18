@@ -42,7 +42,7 @@ async def get_levels(difficulty: str):
 @router.post("/signin")
 async def sign_in(request: SignInRequest):
     # Dummy authentication logic
-    user = users.find_one({"username": request.username})
+    user = users.find_one({"email": request.email})
     if user and bcrypt.checkpw(request.password.encode('utf-8'), user['password']):
         return {"message": "Signed in successfully!"}
     else:
@@ -54,12 +54,12 @@ async def sign_in(request: SignInRequest):
 @router.post("/signup")
 async def signup(request: SignInRequest):
     request.password = request.password # Ideally, you should hash the password
-    existing_user = users.find_one({"username": request.username})
+    existing_user = users.find_one({"email": request.email})
     if existing_user:
-        raise ValueError("username already exists")
+        raise ValueError("Email is in use")
     hashed_password = bcrypt.hashpw(request.password.encode('utf-8'), bcrypt.gensalt())
     user_data = {
-        "username": request.username,
+        "email": request.email,
         "password": hashed_password
     }
     users.insert_one(user_data)
