@@ -53,11 +53,28 @@ jobs:
 
     - name: Pull Amplify environment
       working-directory: ./frontend
-      run: amplify pull --appId ${{ secrets.AMPLIFY_APP_ID }} --envName ${{ secrets.AMPLIFY_BRANCH_NAME }} --yes
+      run: |
+        amplify pull --appId ${{ secrets.AMPLIFY_APP_ID }} --envName ${{ secrets.AMPLIFY_BRANCH_NAME }} --yes --verbose
+      env:
+        AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+        AMPLIFY_BRANCH_NAME: ${{ secrets.AMPLIFY_BRANCH_NAME }}
+
+    - name: Debug Amplify environment
+      working-directory: ./frontend
+      run: |
+        amplify env get --name $AMPLIFY_BRANCH_NAME --verbose
+        amplify status --verbose
+        aws s3 ls s3://$S3_BUCKET/ --recursive
+        aws cloudformation describe-stacks --stack-name amplify-${{ secrets.AMPLIFY_APP_ID }}-${{ secrets.AMPLIFY_BRANCH_NAME }} --region $AWS_REGION
+      env:
+        AWS_REGION: us-east-1
+        S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+        AMPLIFY_BRANCH_NAME: ${{ secrets.AMPLIFY_BRANCH_NAME }}
 
     - name: Deploy React app to Amplify
       working-directory: ./frontend
-      run: amplify publish --yes
+      run: amplify publish --yes --verbose
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -77,3 +94,6 @@ jobs:
         aws s3 cp app.zip s3://$S3_BUCKET/
         aws elasticbeanstalk create-application-version --application-name $EB_APPLICATION_NAME --version-label $GITHUB_SHA --source-bundle S3Bucket=$S3_BUCKET,S3Key=app.zip
         aws elasticbeanstalk update-environment --environment-name $EB_ENVIRONMENT_NAME --version-label $GITHUB_SHA
+      env:
+        AWS_REGION: $AWS_REGION
+        S3_BUCKET: $S3_BUCKET
