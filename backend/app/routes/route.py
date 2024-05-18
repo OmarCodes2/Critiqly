@@ -1,34 +1,12 @@
 from fastapi import APIRouter, HTTPException, status
-from app.models.todos import Todo
 from app.models.levels import Level
 from app.models.signIn import SignInRequest
-from app.config.database import collection_name, levels, users, create_base_level
+from app.config.database import levels, users, create_base_level
 from app.schema.schemas import *
 from bson import ObjectId
 
 router = APIRouter()
 
-#GET Request Method
-@router.get("/")
-async def get_todos():
-    todos = list_serial(collection_name.find()) #find everything incollection and return
-    return todos
-
-#POST Request Method
-@router.post("/")
-async def post_todo(todo: Todo):
-    collection_name.insert_one(dict(todo))
-    
-#POST Request Levels(Creating Level)
-@router.post("/CreateLevel")
-async def post_levels(level: Level):
-    levels.insert_one(dict(level))
-    
-# POST Request Levels (Creating Level)
-@router.post("/CreateLevel")
-async def post_levels(level: Level):
-    levels.insert_one(dict(level))
-    return {"message": "Level created successfully"}
 
 # POST Request to Insert Base Level
 @router.post("/InsertBaseLevel")

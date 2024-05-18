@@ -21,14 +21,3 @@ def individual_seriallevel(level) -> dict:
 
 def list_seriallevels(levels) -> list:
     return [individual_seriallevel(level) for level in levels]
-
-#Template Code for References:
-def individual_serial(todo) -> dict:
-    return {
-        "id": str(todo["_id"]),
-        "name": todo["name"],
-        "description": todo["description"],
-        "complete": todo["complete"],
-    }
-def list_serial(todos) -> list:
-    return[individual_serial(todo) for todo in todos]
