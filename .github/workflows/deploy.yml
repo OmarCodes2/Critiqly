@@ -49,8 +49,11 @@ jobs:
     - name: Install Amplify CLI
       run: npm install -g @aws-amplify/cli
 
+    - name: Initialize Amplify
+      run: amplify pull --app-id $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH_NAME --yes
+
     - name: Deploy React app to Amplify
-      run: amplify publish --app-id $AMPLIFY_APP_ID --branch-name $AMPLIFY_BRANCH_NAME --yes
+      run: amplify publish --yes
 
     - name: Set up Python
       uses: actions/setup-python@v2
