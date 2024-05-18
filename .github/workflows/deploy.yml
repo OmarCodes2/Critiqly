@@ -49,9 +49,14 @@ jobs:
     - name: Install Amplify CLI
       run: npm install -g @aws-amplify/cli
 
-    - name: Initialize Amplify
+    - name: Check Amplify environment
       working-directory: ./frontend
-      run: amplify pull --app-id $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH_NAME --yes
+      run: |
+        if amplify env get --name $AMPLIFY_BRANCH_NAME; then
+          echo "Amplify environment exists."
+        else
+          amplify pull --app-id $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH_NAME --yes
+        fi
 
     - name: Deploy React app to Amplify
       working-directory: ./frontend
