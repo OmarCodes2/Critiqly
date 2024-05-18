@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 from models.todos import Todo
 from models.levels import Level
+from models.signIn import SignInRequest
 from config.database import collection_name, levels
 from schema.schemas import *
 from bson import ObjectId
@@ -28,3 +29,14 @@ async def post_levels(level: Level):
 async def get_levels():
     todos = list_level(levels.find()) #find everything incollection and return
     return todos
+
+@router.post("/signin")
+async def sign_in(request: SignInRequest):
+    # Dummy authentication logic
+    if request.username == "user" and request.password == "pass":
+        return {"message": "Signed in successfully!"}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Sign in failed."
+        )
