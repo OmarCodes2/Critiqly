@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 class CodeVersion(BaseModel):
-    id: float  # Use decimal IDs to differentiate between versions
+    id: int  
     code: str  # The code content
 
 class CodeLine(BaseModel):
@@ -13,5 +13,11 @@ class CodeLine(BaseModel):
     
 class Level(BaseModel):
     difficulty: str
+    number_of_mistakes: int
+    mistakes_found: int
     lines: List[CodeLine]
     readme: str
+
+class UserInteraction(BaseModel):
+    code: Level
+    user_input: str
