@@ -65,7 +65,7 @@ const SignInPage = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="button">Sign in</button>
+                    <button type="submit" className="button">Monkey</button>
                 </form>
                 <button onClick={handleForgotPassword} className="link-button">Forgot password?</button>
                 <div className="signUp">
