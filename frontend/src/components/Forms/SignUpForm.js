@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Form.css';
 
 function SignUpForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Dummy request for sign-up
-    console.log('Sign Up', { email, password, name });
-    // Add your sign-up request here
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        navigate('/login');
+      } else {
+        console.error('Sign up failed');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
   return (
@@ -26,12 +40,6 @@ function SignUpForm() {
         placeholder="Enter your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
       />
       <button className="submit-btn" type="submit">Sign Up</button>
     </form>

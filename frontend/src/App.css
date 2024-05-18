@@ -13,8 +13,18 @@ body {
     text-align: center;
   }
   
-  h1 {
+  .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .heading .blue {
     color: #007bff;
+  }
+  
+  .heading .white {
+    color: #ffffff;
   }
   
   .tab-container {

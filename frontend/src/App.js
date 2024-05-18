@@ -8,7 +8,10 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <h1>Better Reviews, Better Code</h1>
+        <h1 className="heading">
+          <span className="blue">Better Reviews,</span>&nbsp;
+          <span className="white">Better Code</span>
+        </h1>
         <div className="tab-container">
           <NavLink
             to="/signup"
@@ -27,6 +30,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/" element={<SignUpForm />} />
+          <Route path="/dashboard" element={<div>Welcome to the dashboard!</div>} />
         </Routes>
       </div>
     </Router>
