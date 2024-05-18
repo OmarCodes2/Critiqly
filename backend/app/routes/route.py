@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from app.models.todos import Todo
 from app.models.levels import Level
 from app.models.signIn import SignInRequest
-from app.config.database import collection_name, levels
+from app.config.database import collection_name, create_base_level, levels
 from app.schema.schemas import *
 from bson import ObjectId
 
@@ -24,11 +24,29 @@ async def post_todo(todo: Todo):
 async def post_levels(level: Level):
     levels.insert_one(dict(level))
     
+# POST Request Levels (Creating Level)
+@router.post("/CreateLevel")
+async def post_levels(level: Level):
+    levels.insert_one(dict(level))
+    return {"message": "Level created successfully"}
+
+# POST Request to Insert Base Level
+@router.post("/InsertBaseLevel")
+async def insert_base_level():
+    base_level = create_base_level()
+    # Check if the base level already exists
+    if not levels.find_one({"difficulty": "base"}):
+        # Insert the base level
+        levels.insert_one(base_level)
+        return {"message": "Base level inserted."}
+    else:
+        return {"message": "Base level already exists skipping insertion."}
+    
 #GET Request Method
 @router.get("/LoadLevel")
 async def get_levels():
-    todos = list_level(levels.find()) #find everything incollection and return
-    return todos
+    levelstest = list_seriallevels(levels.find()) #find everything incollection and return
+    return levelstest
 
 @router.post("/signin")
 async def sign_in(request: SignInRequest):
