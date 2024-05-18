@@ -1,0 +1,99 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      EB_APPLICATION_NAME: ${{ secrets.EB_APPLICATION_NAME }}
+      EB_ENVIRONMENT_NAME: ${{ secrets.EB_ENVIRONMENT_NAME }}
+      AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+      AMPLIFY_BRANCH_NAME: ${{ secrets.AMPLIFY_BRANCH_NAME }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Create .env file for React app
+      run: echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > ./frontend/.env
+
+    - name: Install dependencies and build React app
+      working-directory: ./frontend
+      run: |
+        npm install
+        npm run build
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Upload React build to S3
+      run: aws s3 sync ./frontend/build s3://$S3_BUCKET/ --delete
+
+    - name: Install Amplify CLI
+      run: npm install -g @aws-amplify/cli
+
+    - name: Pull Amplify environment
+      working-directory: ./frontend
+      run: |
+        amplify pull --appId ${{ secrets.AMPLIFY_APP_ID }} --envName ${{ secrets.AMPLIFY_BRANCH_NAME }} --yes --verbose
+      env:
+        AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+        AMPLIFY_BRANCH_NAME: ${{ secrets.AMPLIFY_BRANCH_NAME }}
+
+    - name: Debug Amplify environment
+      working-directory: ./frontend
+      run: |
+        amplify env get --name $AMPLIFY_BRANCH_NAME --verbose
+        amplify status --verbose
+        aws s3 ls s3://$S3_BUCKET/ --recursive
+        aws cloudformation describe-stacks --stack-name amplify-${{ secrets.AMPLIFY_APP_ID }}-${{ secrets.AMPLIFY_BRANCH_NAME }} --region $AWS_REGION
+      env:
+        AWS_REGION: us-east-1
+        S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+        AMPLIFY_BRANCH_NAME: ${{ secrets.AMPLIFY_BRANCH_NAME }}
+
+    - name: Deploy React app to Amplify
+      working-directory: ./frontend
+      run: amplify publish --yes --verbose
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies for FastAPI
+      working-directory: ./backend
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy FastAPI to Elastic Beanstalk
+      working-directory: ./backend
+      run: |
+        zip -r app.zip .
+        aws s3 cp app.zip s3://$S3_BUCKET/
+        aws elasticbeanstalk create-application-version --application-name $EB_APPLICATION_NAME --version-label $GITHUB_SHA --source-bundle S3Bucket=$S3_BUCKET,S3Key=app.zip
+        aws elasticbeanstalk update-environment --environment-name $EB_ENVIRONMENT_NAME --version-label $GITHUB_SHA
+      env:
+        AWS_REGION: $AWS_REGION
+        S3_BUCKET: $S3_BUCKET

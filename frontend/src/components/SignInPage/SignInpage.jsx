@@ -30,6 +30,16 @@ const SignInPage = () => {
         }
     };
 
+    const handleForgotPassword = () => {
+        // Implement forgot password logic
+        console.log('Forgot password clicked');
+    };
+
+    const handleCreateAccount = () => {
+        // Implement create account logic
+        console.log('Create account clicked');
+    };
+
     return (
         <div className="container">
             <div className="card">
@@ -57,9 +67,9 @@ const SignInPage = () => {
                     </div>
                     <button type="submit" className="button">Sign in</button>
                 </form>
-                <a href="#" className="link">Forgot password?</a>
+                <button onClick={handleForgotPassword} className="link-button">Forgot password?</button>
                 <div className="signUp">
-                    <span>New to GitHub? <a href="#" className="link">Create an account</a></span>
+                    <span>New to GitHub? <button onClick={handleCreateAccount} className="link-button">Create an account</button></span>
                 </div>
                 {message && <div className="message">{message}</div>}
             </div>
