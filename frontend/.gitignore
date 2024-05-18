@@ -42,4 +42,6 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+amplify/backend/
+amplify/#current-cloud-backend/
 #amplify-do-not-edit-end
