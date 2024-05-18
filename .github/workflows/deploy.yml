@@ -27,6 +27,9 @@ jobs:
       with:
         node-version: '14'
 
+    - name: Create .env file for React app
+      run: echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > ./frontend/.env
+
     - name: Install dependencies and build React app
       working-directory: ./frontend
       run: |
