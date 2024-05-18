@@ -1,3 +1,4 @@
+pipeline:
 name: CI/CD Pipeline
 
 on:
@@ -48,6 +49,10 @@ jobs:
 
     - name: Install Amplify CLI
       run: npm install -g @aws-amplify/cli
+
+    - name: Initialize Amplify
+      working-directory: ./frontend
+      run: amplify init --yes --amplify "{\"envName\":\"${{ secrets.AMPLIFY_BRANCH_NAME }}\"}" --providers "{\"awscloudformation\":{\"configLevel\":\"project\",\"useProfile\":false}}" --categories "{}"
 
     - name: Check Amplify environment
       working-directory: ./frontend
