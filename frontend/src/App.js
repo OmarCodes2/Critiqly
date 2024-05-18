@@ -5,23 +5,17 @@ import './App.css';
 import SignUpForm from './components/Forms/SignUpForm';
 import LoginForm from './components/Forms/LoginForm';
 import Home from './components/Homepage/Home';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <h1 className="heading">
-          <span className="blue">Better Reviews,</span>&nbsp;
-          <span className="white">Better Code</span>
-        </h1>
-        <TabContainer />
         <Routes>
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<div>Welcome to the dashboard!</div>} />
+          <Route path="/dashboard" element={Dashboard} />
         </Routes>
-      </div>
     </Router>
   );
 }
