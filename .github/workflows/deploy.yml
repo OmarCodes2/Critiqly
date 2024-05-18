@@ -36,17 +36,18 @@ jobs:
         npm install
         npm run build
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: $AWS_REGION
+
     - name: Upload React build to S3
       run: aws s3 sync ./frontend/build s3://$S3_BUCKET/ --delete
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Deploy React app to Amplify
       run: amplify publish --app-id $AMPLIFY_APP_ID --branch-name $AMPLIFY_BRANCH_NAME --yes
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -65,7 +66,5 @@ jobs:
         aws elasticbeanstalk create-application-version --application-name $EB_APPLICATION_NAME --version-label $GITHUB_SHA --source-bundle S3Bucket=$S3_BUCKET,S3Key=app.zip
         aws elasticbeanstalk update-environment --environment-name $EB_ENVIRONMENT_NAME --version-label $GITHUB_SHA
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: $AWS_REGION
         S3_BUCKET: $S3_BUCKET
