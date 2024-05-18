@@ -12,4 +12,4 @@ client = MongoClient(mongoURL)
 db = client.todo_db
 
 collection_name =db["todo_collection"]
-collection_name1=db["levels"]
+levels=db["levels"]

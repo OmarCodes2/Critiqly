@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from models.todos import Todo
 from models.levels import Level
-from config.database import collection_name, collection_name1
+from config.database import collection_name, levels
 from schema.schemas import *
 from bson import ObjectId
 
@@ -21,10 +21,10 @@ async def post_todo(todo: Todo):
 #POST Request Levels(Creating Level)
 @router.post("/CreateLevel")
 async def post_levels(level: Level):
-    collection_name1.insert_one(dict(level))
+    levels.insert_one(dict(level))
     
 #GET Request Method
 @router.get("/LoadLevel")
 async def get_levels():
-    todos = list_level(collection_name1.find()) #find everything incollection and return
+    todos = list_level(levels.find()) #find everything incollection and return
     return todos
