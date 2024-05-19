@@ -1,13 +1,38 @@
-import React from 'react';
-import { useLocation  } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Codereview.css';
+import logoPath from './Vector (1).png';
 
 const Codereview = () => {
   const location = useLocation();
   const { code } = location.state || {};  // Destructure code from location.state
 
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'How do I improve this function?' },
+    { sender: 'user', text: 'You can start by adding docstrings and type hints.' },
+  ]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSendMessage = () => {
+    if (inputValue.trim()) {
+      setMessages([...messages, { sender: 'user', text: inputValue }]);
+      setInputValue('');
+    }
+  };
+  const navigate = useNavigate();
+  const handleProblemsClick = () => {
+      navigate('/dashboard');
+  };
+  
   return (
     <div className="container">
+      <header className="header">
+        <div className="left-container">
+          <img src={logoPath} alt="Logo" className="logo-image" />
+          <div className="logo">critqly</div>
+        </div>
+        <button className="problems-button" onClick={handleProblemsClick}>Problems</button>
+      </header>
       {/* Sidebar */}
       <div className="sidebar">
         <h2>Hawkhacks</h2>
@@ -60,18 +85,22 @@ def example_function():
       
       {/* Chatbot Section */}
       <div className="chatbot">
-        <h2>Chatbot</h2>
-        <div className="chat-window">
-          <div className="chat-message">
-            <strong>Sarah:</strong> How do I improve this function?
-          </div>
-          <div className="chat-message">
-            <strong>Bot:</strong> You can start by adding docstrings and type hints.
-          </div>
+      <h2>Chatbot</h2>
+        <div className="messages-container">
+          {messages.map((message, index) => (
+            <div key={index} className={`message ${message.sender}`}>
+              {message.text}
+            </div>
+          ))}
         </div>
-        <div className="chat-input">
-          <input type="text" placeholder="Type your message..." />
-          <button>Send</button>
+        <div className="input-container">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Type your message..."
+          />
+          <button onClick={handleSendMessage}>Send</button>
         </div>
       </div>
     </div>
