@@ -9,8 +9,10 @@ const Home = () => {
   return (
     <div className="home-container">
       <header className="header">
-        <img src={logoPath} alt="Logo" className="logo-image" />
+        <div className="left-container">
+        <img src={logoPath2} alt="Logo" className="logo-image" />
         <div className="logo">Critqly</div>
+        </div>
       </header>
       <main className="main-content">
         <h1 className="title">Review <span className="highlight">Better</span><br />Code <span className="highlight">Smarter</span></h1>

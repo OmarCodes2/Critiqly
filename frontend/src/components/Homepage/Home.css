@@ -54,7 +54,7 @@ body {
   }
   
   .highlight {
-    background: -webkit-linear-gradient(#C062E2, #9382EF); /* Apply gradient color */
+    background: -webkit-linear-gradient(, #9382EF); /* Apply gradient color */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

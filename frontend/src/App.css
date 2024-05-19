@@ -21,7 +21,9 @@ body {
   }
   
   .heading .blue {
-    color: #007bff;
+    background: -webkit-linear-gradient(#C062E2, #9382EF); /* Apply gradient color */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
   .heading .white {
@@ -46,6 +48,6 @@ body {
   }
   
   .tab-button.active {
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #9382EF;
   }
   

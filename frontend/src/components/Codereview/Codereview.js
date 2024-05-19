@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Codereview.css';
-import logoPath from './Vector (1).png';
+import logoPath from './Vector.png';
 
 const Codereview = () => {
   const location = useLocation();
