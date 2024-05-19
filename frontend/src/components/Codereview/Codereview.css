@@ -73,6 +73,7 @@ pre {
   display: flex;
   flex-direction: column;
   padding-top: 5rem;
+  overflow: hidden;
 }
 
 .chatbot h2 {
