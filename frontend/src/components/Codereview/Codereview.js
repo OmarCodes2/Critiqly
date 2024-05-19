@@ -1,29 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Codereview.css';
 import logoPath from './Vector (1).png';
 
 const Codereview = () => {
   const location = useLocation();
-  const { code } = location.state || {};  // Destructure code from location.state
+  const initialCodeState = location.state ? location.state.code : null;
+  const [code, setCode] = useState(initialCodeState);
 
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'How do I improve this function?' },
-    { sender: 'user', text: 'You can start by adding docstrings and type hints.' },
+    { sender: 'bot', text: 'Hey, I am your coworker. Please review my code before we merge it!' },
   ]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleSendMessage = () => {
+  useEffect(() => {
+    if (location.state && location.state.code) {
+      setCode(location.state.code);
+    }
+  }, [location.state]);
+
+  const handleSendMessage = async() => {
     if (inputValue.trim()) {
-      setMessages([...messages, { sender: 'user', text: inputValue }]);
+      const userInputMessage = { sender: 'user', text: inputValue };
+      const newMessages = [...messages, userInputMessage];
+
+      // Make post request with the last message and the code
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/UserInteraction`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 'code':code, 'user_input':inputValue }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const { response: newMessage, code: newCode } = data;
+
+          newMessages.push({ sender: 'bot', text: newMessage });
+          setMessages(newMessages);
+           
+          setCode(newCode);
+        } else {
+          console.error('request');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+
       setInputValue('');
     }
   };
+
   const navigate = useNavigate();
   const handleProblemsClick = () => {
-      navigate('/dashboard');
+    navigate('/dashboard');
   };
-  
+
   return (
     <div className="container">
       <header className="header">
@@ -45,18 +78,8 @@ const Codereview = () => {
       {/* Code Review Section */}
       <div className="code-review">
         <h2>Code Review</h2>
-        {/* <pre>
-          <code>
-            {`
-# Some example Python code for review
-def example_function():
-    print("Hello, world!")
-    return True
-            `}
-          </code>
-        </pre> */}
         <div>
-          {code.lines.map((line, index) => {
+          {code && code.lines.map((line, index) => {
             let codes = [];
             if (line.is_modified) {
               if (line.is_correct) {
@@ -85,7 +108,7 @@ def example_function():
       
       {/* Chatbot Section */}
       <div className="chatbot">
-      <h2>Chatbot</h2>
+        <h2>Chatbot</h2>
         <div className="messages-container">
           {messages.map((message, index) => (
             <div key={index} className={`message ${message.sender}`}>
@@ -108,4 +131,3 @@ def example_function():
 };
 
 export default Codereview;
-

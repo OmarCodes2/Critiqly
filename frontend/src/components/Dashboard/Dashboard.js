@@ -6,6 +6,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleLevelClick = async (level) => {
+    console.log(process.env.REACT_APP_API_URL)
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/LoadLevel?difficulty=${level}`);
       const data = await response.json();
