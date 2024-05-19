@@ -23,7 +23,7 @@ const Dashboard = () => {
       <h1>
         Ready to step up your <span className="highlight">code review</span> game?
       </h1>
-      <h2>Choose your <span className="highlight">level!</span></h2>
+      <h2>Choose your <span className="highlight">level:</span></h2>
       <div className="levels">
         <div className="level easy" onClick={() => handleLevelClick('easy')}>
           <span className="level-tag">Easy</span>
