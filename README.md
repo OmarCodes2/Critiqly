@@ -7,7 +7,7 @@ Critiqly is an AI-powered, gamified code review platform designed to elevate you
 
 ## App Screenshots
 
-<img width="1274" alt="image" src="https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/71543a1d-6536-4cc0-8872-2f8048078a59">
+![image](https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/781f2405-b009-49cf-8575-6aa5d8ea22d7)
 Home Page
 
 <img width="1274" alt="image" src="https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/2d418af3-4d25-4582-bee3-2fb873a7532a">
