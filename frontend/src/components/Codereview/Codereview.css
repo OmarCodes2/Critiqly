@@ -212,3 +212,11 @@ button {
   display: flex;
   align-items: center;
 }
+
+.highlight_red{
+   background-color: rgba(255, 0, 0, 0.2); /* Red with 30% opacity */
+}
+
+.highlight_green{
+  background-color: rgba(0, 255, 0, 0.2); /* Green with 30% opacity */
+}

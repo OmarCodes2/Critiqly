@@ -73,7 +73,7 @@ def example_function():
             return (
               <div key={index}>
                 {codes.map((code, cIndex) => (
-                  <div key={cIndex} className={codes.length > 1 && cIndex === 0 ? 'highlight_red' : (codes.length > 1 && cIndex === 1 ? 'hightlight_green' : '')}>
+                  <div key={cIndex} className={codes.length > 1 && cIndex === 0 ? 'highlight_red' : (codes.length > 1 && cIndex === 1 ? 'highlight_green' : '')}>
                     <code>{line.line_number} {code}</code>
                   </div>
                 ))}
