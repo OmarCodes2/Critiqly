@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import imagepath from './codereview.png';
+import imagepath1 from './codereview (1).png';
+import imagepath2 from './codereview (2).png';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -27,12 +30,15 @@ const Dashboard = () => {
       <div className="levels">
         <div className="level easy" onClick={() => handleLevelClick('easy')}>
           <span className="level-tag">Easy</span>
+          <img src={imagepath} alt="Logo" style={{ width: '75%', height: '75%', objectFit: 'contain' }}/>
         </div>
         <div className="level medium" onClick={() => handleLevelClick('medium')}>
           <span className="level-tag">Medium</span>
+          <img src={imagepath1} alt="Logo" style={{ width: '75%', height: '75%', objectFit: 'contain' }}/>
         </div>
         <div className="level hard" onClick={() => handleLevelClick('hard')}>
           <span className="level-tag">Hard</span>
+          <img src={imagepath2} alt="Logo" style={{ width: '75%', height: '75%', objectFit: 'contain' }}/>
         </div>
       </div>
     </div>
