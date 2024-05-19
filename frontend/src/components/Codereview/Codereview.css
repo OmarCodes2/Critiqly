@@ -123,6 +123,7 @@ pre {
   color: #C062E2; /* Adjust color if needed */
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .problems-button:hover {
