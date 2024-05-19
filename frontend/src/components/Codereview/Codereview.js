@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Codereview.css';
 import logoPath from './Vector (1).png';
 
 const Codereview = () => {
+  const location = useLocation();
+  const { code } = location.state || {};  // Destructure code from location.state
+
   const [messages, setMessages] = useState([
     { sender: 'bot', text: 'How do I improve this function?' },
     { sender: 'user', text: 'You can start by adding docstrings and type hints.' },
@@ -20,6 +23,7 @@ const Codereview = () => {
   const handleProblemsClick = () => {
       navigate('/dashboard');
   };
+  
   return (
     <div className="container">
       <header className="header">
@@ -41,7 +45,7 @@ const Codereview = () => {
       {/* Code Review Section */}
       <div className="code-review">
         <h2>Code Review</h2>
-        <pre>
+        {/* <pre>
           <code>
             {`
 # Some example Python code for review
@@ -50,7 +54,33 @@ def example_function():
     return True
             `}
           </code>
-        </pre>
+        </pre> */}
+        <div>
+          {code.lines.map((line, index) => {
+            let codes = [];
+            if (line.is_modified) {
+              if (line.is_correct) {
+                codes.push(line.versions.find(version => version.id === 1).code);
+                codes.push(line.versions.find(version => version.id === 3).code);
+              } else {
+                codes.push(line.versions.find(version => version.id === 1).code);
+                codes.push(line.versions.find(version => version.id === 2).code);
+              }
+            } else {
+              codes.push(line.versions[0].code);
+            }
+
+            return (
+              <div key={index}>
+                {codes.map((code, cIndex) => (
+                  <div key={cIndex} className={codes.length > 1 && cIndex === 0 ? 'highlight_red' : (codes.length > 1 && cIndex === 1 ? 'hightlight_green' : '')}>
+                    <code>{line.line_number} {code}</code>
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
       </div>
       
       {/* Chatbot Section */}
