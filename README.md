@@ -5,6 +5,11 @@
 
 Critiqly is an AI-powered, gamified code review platform designed to elevate your code review experience. It provides engaging onboarding and practical ways for new hires to learn and contribute to code reviews. Users can practice code reviews, receive instant AI feedback, and immerse themselves in company code review standards at their own pace. Critiqly helps users improve their code review skills through adaptive learning and levels that match their skill levels.
 
+## App Screenshots
+
+![Code Review Page](<img width="1274" alt="image" src="https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/e588f913-dfcf-403c-800d-b102d990852a">)
+*Login and Sign Up Screen*
+
 ## Tech Stack
 
 - **Frontend**: React
