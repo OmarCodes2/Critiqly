@@ -56,9 +56,9 @@ def create_easy_level():
                 is_modified = True,
                 is_correct = False,
                 versions=[
-                    CodeVersion(id=1, code="    sum_value = f + y"),
-                    CodeVersion(id=2, code="    sum_value = f x y"),
-                    CodeVersion(id=3, code="    sum_value = f * y"),
+                    CodeVersion(id=1, code="    result = f + y"),
+                    CodeVersion(id=2, code="    result = f x y"),
+                    CodeVersion(id=3, code="    result = f * y"),
                 ]
             ),
             CodeLine(
@@ -66,8 +66,8 @@ def create_easy_level():
                 is_modified = True,
                 is_correct = True,
                 versions=[
-                    CodeVersion(id=1, code="    print(f'The sum of x and y is: {sum_value}')"),
-                    CodeVersion(id=3, code="    print(f'The product of x and y is: {sum_value}')"),  # Corrected
+                    CodeVersion(id=1, code="    print(f'The sum of x and y is: {result}')"),
+                    CodeVersion(id=3, code="    print(f'The product of x and y is: {result}')"),  # Corrected
                 ]
             ),
             CodeLine(
@@ -75,16 +75,16 @@ def create_easy_level():
                 is_modified = True,
                 is_correct = False,
                 versions=[
-                    CodeVersion(id=1, code="    if product_value > 20:"),
-                    CodeVersion(id=2, code="    if product_value > 20"),  
-                    CodeVersion(id=3, code="    if product_value > 20:"),  
+                    CodeVersion(id=1, code="    if result > 20:"),
+                    CodeVersion(id=2, code="    if result > 20"),  
+                    CodeVersion(id=3, code="    if result > 20:"),  
                 ]
             ),
             CodeLine(
                 line_number=8,
                 is_modified = False,
                 versions=[
-                    CodeVersion(id=1, code="        print('Sum is greater than 20')"),
+                    CodeVersion(id=1, code="        print('Result is greater than 20')"),
                 ]
             ),
             CodeLine(
@@ -98,18 +98,18 @@ def create_easy_level():
                 line_number=10,
                 is_modified = False,
                 versions=[
-                    CodeVersion(id=1, code="        print('Sum is not greater than 20')"),
+                    CodeVersion(id=1, code="        print('Result is not greater than 20')"),
                 ]
             ),
             CodeLine(
                 line_number=11,
                 is_modified = False,
                 versions=[
-                    CodeVersion(id=1, code="    return sum_value"),
+                    CodeVersion(id=1, code="    return result"),
                 ]
             ),
         ],
-        readme="This is an easy level with a function that calculates the sum of two numbers. The person has changed the function to multiplication of two numbers instead. There are two mistakes with the new additions that need to be fixed."
+        readme="This is an easy level with a function that calculates the sum of two numbers. The goal of your coworker was to change it to multiplication of the two numbers. There are two mistakes with the new additions that need to be fixed."
     )
     return easy_level.dict()
     

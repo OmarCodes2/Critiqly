@@ -10,7 +10,7 @@ const Codereview = () => {
   const [readme, setReadme] = useState(false)
 
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hey, I am your coworker. Please review my code before we merge it!' },
+    { sender: 'bot', text: 'Hey, please review my code before we merge it!' },
   ]);
   const [inputValue, setInputValue] = useState('');
 

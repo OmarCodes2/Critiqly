@@ -47,7 +47,7 @@ body {
 }
 
 .code-review {
-  width: 65%;
+  width: 45vw;
   padding: 20px;
   padding-top: 5rem;
 }
@@ -67,7 +67,7 @@ pre {
 }
 
 .chatbot {
-  width: 30%;
+  width: 22vw;
   background-color: #2a2a2a;
   padding: 20px;
   display: flex;
