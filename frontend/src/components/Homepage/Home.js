@@ -10,7 +10,7 @@ const Home = () => {
     <div className="home-container">
       <header className="header">
         <img src={logoPath} alt="Logo" className="logo-image" />
-        <div className="logo">critqly</div>
+        <div className="logo">Critqly</div>
       </header>
       <main className="main-content">
         <h1 className="title">Review <span className="highlight">Better</span><br />Code <span className="highlight">Smarter</span></h1>

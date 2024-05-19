@@ -63,7 +63,7 @@ const Codereview = () => {
       <header className="header">
         <div className="left-container">
           <img src={logoPath} alt="Logo" className="logo-image" />
-          <div className="logo">critqly</div>
+          <div className="logo">Critqly</div>
         </div>
         <button className="problems-button" onClick={handleProblemsClick}>Problems</button>
       </header>
