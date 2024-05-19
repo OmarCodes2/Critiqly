@@ -1,30 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLevelClick = async (level) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/LoadLevel?difficulty=${level}`);
+      const data = await response.json();
+      const code = data[0]
+      console.log(code);
+      navigate('/codereview', { state: { code } });
+    } catch (error) {
+      console.error('Error fetching level data:', error);
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <h1>
-        Hey <span className="highlight">Sarah!</span> Ready to step up your <span className="highlight">code review</span> game?
+        Ready to step up your <span className="highlight">code review</span> game?
       </h1>
       <h2>Choose your level!</h2>
       <div className="levels">
-        <div className="level beginner">
+        <div className="level beginner" onClick={() => handleLevelClick('easy')}>
           <span className="level-tag">Beginner</span>
         </div>
-        <div className="level medium">
+        <div className="level medium" onClick={() => handleLevelClick('medium')}>
           <span className="level-tag">Medium</span>
         </div>
-        <div className="level hard">
+        <div className="level hard" onClick={() => handleLevelClick('hard')}>
           <span className="level-tag">Hard</span>
         </div>
       </div>
-      <Link to="/codereview">
-        <button className="next-button">
-          <span className="button-text">Next</span>
-        </button>
-      </Link>
     </div>
   );
 };
