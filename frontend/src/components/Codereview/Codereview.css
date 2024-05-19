@@ -23,7 +23,9 @@ body {
 }
 
 .sidebar h2 {
-  color: #4ca1ff;
+  background: -webkit-linear-gradient(#C062E2, #9382EF); /* Apply gradient color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
   margin-bottom: 20px;
 }
 
@@ -51,7 +53,9 @@ body {
 }
 
 .code-review h2 {
-  color: #4ca1ff;
+  background: -webkit-linear-gradient(#C062E2, #9382EF); /* Apply gradient color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
   margin-bottom: 20px;
 }
 
@@ -72,7 +76,9 @@ pre {
 }
 
 .chatbot h2 {
-  color: #4ca1ff;
+  background: -webkit-linear-gradient(#C062E2, #9382EF); /* Apply gradient color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
   margin-bottom: 20px;
 }
 
@@ -102,26 +108,25 @@ pre {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: #4ca1ff;
+  background-color: #C062E2;
   color: #fff;
   cursor: pointer;
 }
 
-.chat-input button:hover {
-  background-color: #5caaff;
+.chatbutton:hover {
+  background-color: #9382EF;
 }
 
 .problems-button {
   background: none;
   border: none;
-  color: #007bff; /* Adjust color if needed */
+  color: #C062E2; /* Adjust color if needed */
   cursor: pointer;
   font-size: 16px;
-  text-decoration: underline;
 }
 
 .problems-button:hover {
-  color: #0056b3; /* Adjust hover color if needed */
+  color: #9382EF; /* Adjust hover color if needed */
 }
 
 .header {
@@ -203,7 +208,7 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: #007bff;
+  background-color: #C062E2;
   color: #fff;
   cursor: pointer;
 }

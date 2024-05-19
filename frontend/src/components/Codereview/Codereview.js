@@ -123,7 +123,7 @@ const Codereview = () => {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Type your message..."
           />
-          <button onClick={handleSendMessage}>Send</button>
+          <button className="chatbutton" onClick={handleSendMessage}>Send</button>
         </div>
       </div>
     </div>
