@@ -16,15 +16,15 @@ body {
 }
 
 .dashboard-container h1 {
-  font-size: 24px;
+  font-size: 3rem;
   font-weight: normal;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .dashboard-container h2 {
-  font-size: 18px;
+  font-size: 2rem;
   font-weight: normal;
-  margin-bottom: 20px;
+  margin-bottom: 0.5rem
 }
 
 .highlight {
@@ -34,13 +34,14 @@ body {
 .levels {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 5em;
+  margin-top: 3em;
   margin-bottom: 20px;
 }
 
 .level {
-  width: 200px;
-  height: 150px;
+  width: 22.5rem;
+  height: 15rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +59,11 @@ body {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
-  font-size: 14px;
+  font-size: 1.5rem;
+}
+
+.level:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .beginner .level-tag {
