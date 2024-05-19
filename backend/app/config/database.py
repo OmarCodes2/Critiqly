@@ -63,11 +63,11 @@ def create_easy_level():
             ),
             CodeLine(
                 line_number=6,
-                is_modified = False,
+                is_modified = True,
                 is_correct = True,
                 versions=[
                     CodeVersion(id=1, code="    print(f'The sum of x and y is: {sum_value}')"),
-                    CodeVersion(id=2, code="    print(f'The product of x and y is: {sum_value}')"),  # Corrected
+                    CodeVersion(id=3, code="    print(f'The product of x and y is: {sum_value}')"),  # Corrected
                 ]
             ),
             CodeLine(
