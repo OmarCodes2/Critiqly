@@ -7,6 +7,7 @@ const Codereview = () => {
   const location = useLocation();
   const initialCodeState = location.state ? location.state.code : null;
   const [code, setCode] = useState(initialCodeState);
+  const [readme, setReadme] = useState(false)
 
   const [messages, setMessages] = useState([
     { sender: 'bot', text: 'Hey, I am your coworker. Please review my code before we merge it!' },
@@ -68,17 +69,18 @@ const Codereview = () => {
       </header>
       {/* Sidebar */}
       <div className="sidebar">
-        <h2>Hawkhacks</h2>
+        <h2>Files</h2>
         <div className="file-list">
-          <div className="file-item">review.py</div>
-          <div className="file-item">README.md</div>
+          <div className="file-item" onClick={() => setReadme(false)}>review.py</div>
+          <div className="file-item" onClick={() => setReadme(true)}>README.md</div>
         </div>
       </div>
       
       {/* Code Review Section */}
       <div className="code-review">
         <h2>Code Review</h2>
-        <div>
+        {readme? (<code>{code.readme}</code>):
+        (<div>
           {code && code.lines.map((line, index) => {
             let codes = [];
             if (line.is_modified) {
@@ -104,11 +106,15 @@ const Codereview = () => {
             );
           })}
         </div>
+        )}
       </div>
       
       {/* Chatbot Section */}
       <div className="chatbot">
-        <h2>Chatbot</h2>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h2 style={{ marginRight: "100px" }}>Chatbot</h2>
+          <h2 style={{ marginLeft: "70px" }}>{code.mistakes_found}/{code.number_of_mistakes}</h2>
+        </div>
         <div className="messages-container">
           {messages.map((message, index) => (
             <div key={index} className={`message ${message.sender}`}>
