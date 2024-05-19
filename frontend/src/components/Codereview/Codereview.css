@@ -141,6 +141,7 @@ pre {
   position: fixed; /* Fixes the header at the top */
   top: 0;
   left: 0;
+  box-shadow: 0 2px 2px -2px grey;
 }
 .logo {
   align-items: left;
