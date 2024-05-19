@@ -11,7 +11,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/LoadLevel?difficulty=${level}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
