@@ -13,6 +13,16 @@ Home Page
 <img width="1274" alt="image" src="https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/2d418af3-4d25-4582-bee3-2fb873a7532a">
 Login and Sign Up Screen
 
+![image](https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/8be13176-857e-49cc-b683-d9d9a31ead71)
+Code Review Page
+
+<img width="629" alt="image" src="https://github.com/OmarCodes2/HawkHacks2024/assets/104934837/8d760157-00f5-4000-946f-04b9e8dace3f">
+Analytics Page
+
+
+
+
+
 ## Tech Stack
 
 - **Frontend**: React
