@@ -126,6 +126,7 @@ const Codereview = () => {
           <input
             type="text"
             value={inputValue}
+            className='rando'
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Type your message..."
           />

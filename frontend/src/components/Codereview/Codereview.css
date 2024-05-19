@@ -13,7 +13,7 @@ body {
 }
 
 .sidebar {
-  width: 40vh;
+  width: 65vh;
   background-color: #2a2a2a;
   padding: 20px;
   display: flex;
@@ -47,7 +47,7 @@ body {
 }
 
 .code-review {
-  width: 65%;
+  width: 90%;
   padding: 20px;
   padding-top: 5rem;
 }
@@ -197,6 +197,12 @@ pre {
 .input-container {
   display: flex;
   gap: 10px;
+  background-color: #2a2a2a;
+}
+
+.rando{
+  background-color: #2a2a2a;
+  color: white;
 }
 
 input[type="text"] {
