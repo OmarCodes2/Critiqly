@@ -7,17 +7,11 @@ const Dashboard = () => {
 
   const handleLevelClick = async (level) => {
     try {
-      // const response = await fetch(`${process.env.REACT_APP_API_URL}/LoadLevel`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({level}),
-      // });
-      // const data = await response.json();
-      // console.log(data)
-      let data = "hello"
-      navigate('/codereview', { state: { data } });
+      const response = await fetch(`http://127.0.0.1:8000/LoadLevel?difficulty=${level}`);
+      const data = await response.json();
+      const code = data[0]
+      console.log(code);
+      navigate('/codereview', { state: { code } });
     } catch (error) {
       console.error('Error fetching level data:', error);
     }
