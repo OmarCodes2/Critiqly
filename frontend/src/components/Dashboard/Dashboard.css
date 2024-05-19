@@ -1,8 +1,7 @@
-/* src/components/Homepage/Home.css */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #1a1a1a;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
   color: #fff;
 }
 
@@ -13,35 +12,34 @@ body {
   justify-content: center;
   height: 100vh;
   text-align: center;
+  padding: 0 20px;
 }
 
 .dashboard-container h1 {
   font-size: 3rem;
-  font-weight: normal;
+  font-weight: bold;
   margin-bottom: 0.5rem;
+  color: #e0e0e0;
 }
 
 .dashboard-container h2 {
   font-size: 2rem;
-  font-weight: normal;
-  margin-bottom: 0.5rem
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #b3b3b3;
 }
 
 .highlight {
-  color: #4ca1ff; /* Change to a brighter color for emphasis */
+  color: #4ca1ff;
 }
 
-.levels {
-  display: flex;
-  justify-content: center;
-  gap: 5em;
-  margin-top: 3em;
-  margin-bottom: 20px;
+.levels-carousel {
+  width: 80%;
 }
 
 .level {
-  width: 22.5rem;
-  height: 15rem;
+  width: 14rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,33 +47,58 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   position: relative;
   cursor: pointer;
-}
-
-.level-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 1.5rem;
+  transition: transform 0.3s, background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
 }
 
 .level:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.level-tag {
+  padding: 15px 30px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 2rem;
 }
 
 .easy .level-tag {
-  background-color: green;
+  background-color: #28a745;
 }
 
 .medium .level-tag {
-  background-color: orange;
+  background-color: #ffc107;
 }
 
 .hard .level-tag {
-  background-color: red;
+  background-color: #dc3545;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
+  padding: 10px;
+}
+
+.arrow-prev {
+  left: 0;
+}
+
+.arrow-next {
+  right: 0;
+}
+
+.arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .next-button {
@@ -93,4 +116,8 @@ body {
 
 .button-text {
   font-size: 16px;
+}
+
+.control-dots{
+  opacity: 0;
 }
