@@ -182,13 +182,13 @@ pre {
 
 .message.bot {
   align-self: flex-start;
-  background-color: #e0e0e0;
-  color: #000;
+  background: #3a3a3a;
+  color: #ffffff;
 }
 
 .message.user {
   align-self: flex-end;
-  background-color: #007bff;
+  background-color: #5e4dbc;
   color: #fff;
 }
 
