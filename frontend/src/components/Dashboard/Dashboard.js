@@ -25,8 +25,8 @@ const Dashboard = () => {
       </h1>
       <h2>Choose your <span className="highlight">level!</span></h2>
       <div className="levels">
-        <div className="level beginner" onClick={() => handleLevelClick('easy')}>
-          <span className="level-tag">Beginner</span>
+        <div className="level easy" onClick={() => handleLevelClick('easy')}>
+          <span className="level-tag">Easy</span>
         </div>
         <div className="level medium" onClick={() => handleLevelClick('medium')}>
           <span className="level-tag">Medium</span>

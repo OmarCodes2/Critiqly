@@ -16,7 +16,7 @@ body {
   .home-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    padding-top: 7.5em;
     box-sizing: border-box; /* Ensures padding is included in the element's total height */
   }
   
