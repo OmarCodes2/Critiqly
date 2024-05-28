@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import imagePath from './Group 1597880729.png';
-import logoPath from './Vector (1).png';
 import logoPath2 from './Vector.png';
 
 const Home = () => {
@@ -25,7 +24,7 @@ const Home = () => {
             <span className="button-text">Start your journey</span>
           </button>
         </Link>
-        <img src={imagePath} alt="Bottom Image" className="bottom-image" />
+        <img src={imagePath} alt="" className="bottom-image" />
       </main>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Form.css';
-import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from 'react-router-dom';
+import { BrowserRouter as NavLink, useLocation } from 'react-router-dom';
 
 function SignUpForm() {
   const [email, setEmail] = useState('');
