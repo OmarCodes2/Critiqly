@@ -1,0 +1,83 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  install:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Build project
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Save build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: frontend/build
+
+  run-component-tests:
+    runs-on: ubuntu-22.04
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: frontend/build
+
+      - name: Run component tests
+        run: |
+          cd frontend
+          npm run test:component
+
+  run-e2e-tests:
+    runs-on: ubuntu-22.04
+    needs: install
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: frontend/build
+
+      - name: Start the server
+        run: |
+          cd frontend
+          npm start &
+        env:
+          CI: true
+
+      - name: Run e2e tests
+        run: |
+          cd frontend
+          npx cypress run
