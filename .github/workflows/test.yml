@@ -71,12 +71,21 @@ jobs:
           name: build
           path: frontend/build
 
+      - name: Install serve
+        run: |
+          cd frontend
+          npm install -g serve
+
       - name: Start the server
         run: |
           cd frontend
-          npm start &
+          serve -s build -l 3000 &
         env:
           CI: true
+
+      - name: Wait for server to be ready
+        run: |
+          npx wait-on http://localhost:3000
 
       - name: Run e2e tests
         uses: cypress-io/github-action@v6
