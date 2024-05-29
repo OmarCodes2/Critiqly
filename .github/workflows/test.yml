@@ -54,6 +54,7 @@ jobs:
       - name: Run component tests
         uses: cypress-io/github-action@v6
         with:
+          component: true
           working-directory: frontend
 
   run-e2e-tests:
