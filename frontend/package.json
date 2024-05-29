@@ -23,6 +23,12 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "env": {
+      "cypress/globals": true
+    },
+    "plugins": [
+      "cypress"
     ]
   },
   "browserslist": {
@@ -38,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^13.10.0"
+    "cypress": "^13.10.0",
+    "eslint-plugin-cypress": "^3.3.0"
   }
 }
