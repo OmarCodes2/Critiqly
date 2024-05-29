@@ -52,9 +52,10 @@ jobs:
           path: frontend/build
 
       - name: Run component tests
-        run: |
-          cd frontend
-          npx cypress run --component
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: frontend
+          spec: cypress/component/**/*.cy.{js,jsx,ts,tsx}
 
   run-e2e-tests:
     runs-on: ubuntu-22.04
@@ -80,6 +81,5 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
-          start: npm start
+          working-directory: frontend
           browser: chrome
