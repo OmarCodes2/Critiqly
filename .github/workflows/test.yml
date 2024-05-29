@@ -54,7 +54,7 @@ jobs:
       - name: Run component tests
         run: |
           cd frontend
-          npm run test:component
+          npx cypress run --component
 
   run-e2e-tests:
     runs-on: ubuntu-22.04
@@ -78,6 +78,8 @@ jobs:
           CI: true
 
       - name: Run e2e tests
-        run: |
-          cd frontend
-          npx cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome
