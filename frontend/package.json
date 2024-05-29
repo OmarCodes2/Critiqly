@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "cypress": "^13.10.0",
     "eslint-plugin-cypress": "^3.3.0"
   }
