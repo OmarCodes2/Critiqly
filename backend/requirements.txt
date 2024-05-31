@@ -27,5 +27,6 @@ urllib3==1.26.6
 fastapi
 pytest
 pytest-asyncio
+pytest-cov
 httpx
 
