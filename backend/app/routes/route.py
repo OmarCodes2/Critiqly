@@ -68,7 +68,8 @@ async def signup(request: SignUpRequest):
     hashed_password = bcrypt.hashpw(request.password.encode('utf-8'), bcrypt.gensalt())
     user_data = {
         "email": request.email,
-        "password": hashed_password
+        "password": hashed_password,
+        "preferred_name": request.preferred_name
     }
     users.insert_one(user_data)
     return {"message": "User created successfully"}
