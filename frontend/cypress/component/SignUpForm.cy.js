@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUpForm from '../../src/components/Forms/SignUpForm';
+import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from 'react-router-dom';
 
 describe('<SignUpForm />', () => {
   it('renders', () => {
