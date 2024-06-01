@@ -53,7 +53,7 @@ async def sign_in(request: SignInRequest):
     # Dummy authentication logic
     user = users.find_one({"email": request.email})
     if user and bcrypt.checkpw(request.password.encode('utf-8'), user['password']):
-        return {"message": "Signed in successfully!"}
+        return {"message": "Signed in successfully!", "user": {"email": user['email'], "preferredName": user['preferredName']}}
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
