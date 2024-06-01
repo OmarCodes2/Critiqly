@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 from app.models.levels import Level, UserInteraction
 from app.models.signIn import SignInRequest
+from app.models.signUp import SignUpRequest
 from app.config.database import levels, users,create_easy_level
 from app.routes.openai_query import *
 from app.schema.schemas import *
@@ -60,8 +61,7 @@ async def sign_in(request: SignInRequest):
         )
 
 @router.post("/signup")
-async def signup(request: SignInRequest):
-    request.password = request.password # Ideally, you should hash the password
+async def signup(request: SignUpRequest):
     existing_user = users.find_one({"email": request.email})
     if existing_user:
         raise ValueError("Email is in use")
