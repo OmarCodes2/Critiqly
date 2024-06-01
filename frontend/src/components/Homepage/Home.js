@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import imagePath from './Group 1597880729.png';
-import logoPath2 from './Vector.png';
+import logoPath from '../../assets/images/Homepage/logo.png';
+import imagePath from '../../assets/images/Homepage/buttom_image.png';
 
 const Home = () => {
   return (
     <div className="home-container">
       <header className="header">
         <div className="left-container">
-        <img src={logoPath2} alt="Logo" className="logo-image" />
+        <img src={logoPath} alt="Logo" className="logo-image" />
         <div className="logo">Critqly</div>
         </div>
       </header>
@@ -20,7 +20,7 @@ const Home = () => {
         </p>
         <Link to="/signup">
           <button className="start-button">
-            <img src={logoPath2} alt="Logo" className="logo-image" />
+            <img src={logoPath} alt="Logo" className="logo-image" />
             <span className="button-text">Start your journey</span>
           </button>
         </Link>
