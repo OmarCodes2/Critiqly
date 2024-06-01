@@ -15,7 +15,7 @@ const Home = () => {
       </header>
       <main className="main-content">
         <h1 className="title">Review <span className="highlight">Better</span><br />Code <span className="highlight">Smarter</span></h1>
-        <p className="subtitle">
+        <p className="text-[18px] text-black text-opacity-80">
           Take your code review to the next level with the help of AI-powered feedback
         </p>
         <Link to="/signup">
