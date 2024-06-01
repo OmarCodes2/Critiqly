@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 import './Form.css';
-import { BrowserRouter as NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,9 +21,11 @@ function LoginForm() {
         body: JSON.stringify({ email, password }),
       });
       if (response.ok) {
+        const data = await response.json();
+        login(data.user);
         navigate('/dashboard');
       } else {
-        console.error('Sign in failed');
+        console.error('Login failed');
       }
     } catch (error) {
       console.error('An error occurred:', error);
@@ -31,8 +35,8 @@ function LoginForm() {
   return (
     <div className="app-container">
       <h1 className="heading">
-          <span className="blue">Better Reviews,</span>&nbsp;
-          <span className="white">Better Code</span>
+        <span className="blue">Welcome Back,</span>&nbsp;
+        <span className="white">Log In</span>
       </h1>
       <TabContainer />
       <form className="form-container" onSubmit={handleSubmit}>
@@ -48,7 +52,7 @@ function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="submit-btn" type="submit">Sign In</button>
+        <button className="submit-btn" type="submit">Log In</button>
       </form>
     </div>
   );
@@ -79,6 +83,5 @@ function TabContainer() {
     </div>
   );
 }
-
 
 export default LoginForm;
