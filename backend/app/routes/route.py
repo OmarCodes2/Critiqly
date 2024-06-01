@@ -69,7 +69,7 @@ async def signup(request: SignUpRequest):
     user_data = {
         "email": request.email,
         "password": hashed_password,
-        "preferred_name": request.preferred_name
+        "preferredName": request.preferredName
     }
     users.insert_one(user_data)
     return {"message": "User created successfully"}
