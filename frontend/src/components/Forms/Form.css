@@ -39,7 +39,7 @@
   position: absolute;
   bottom: -13px;
   left: 0;
-  color: #d43f8d;
+  color: #C062E2;
   font-size: 0.8em;
 }
 
@@ -55,6 +55,6 @@
 }
 
 .tab-button.active {
-  border-bottom: 2px solid #d43f8d;
+  border-bottom: 2px solid #C062E2;
   color: white;
 }
