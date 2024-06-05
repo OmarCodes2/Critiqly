@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body, h1, input, button {
   margin: 0;
   padding: 0;
@@ -16,4 +20,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.highlight1 {
+  background: -webkit-linear-gradient(#C062E2, #9382EF); /* Apply gradient color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

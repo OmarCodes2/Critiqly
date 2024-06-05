@@ -11,13 +11,18 @@ def individual_seriallevel(level) -> dict:
                 } for version in line["versions"]
             ]
         }
+    def serialize_file(file):
+        return{
+            "filename" : file["filename"],
+            "lines": [serialize_code_line(line) for line in file["lines"]]
+        }
 
     return {
         "id": str(level["_id"]),
-        "difficulty": level["difficulty"],
+        "repo": level["repo"],
         "number_of_mistakes": level["number_of_mistakes"],
         "mistakes_found": level["mistakes_found"],
-        "lines": [serialize_code_line(line) for line in level["lines"]],
+        "files":[serialize_file(file) for file in level["files"]],
         "readme": level.get("readme")
     }
 
