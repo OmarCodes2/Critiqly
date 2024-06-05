@@ -11,7 +11,7 @@ const Dashboard = () => {
   const handleLevelClick = async (level) => {
     console.log(process.env.REACT_APP_API_URL)
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/LoadLevel?difficulty=${level}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/LoadLevel?repo=${level}`);
       const data = await response.json();
       const code = data[0]
       console.log(code);
@@ -28,7 +28,7 @@ const Dashboard = () => {
       </h1>
       <h2>Choose your <span className="highlight">level:</span></h2>
       <div className="levels">
-        <div className="level easy" onClick={() => handleLevelClick('easy')}>
+        <div className="level easy" onClick={() => handleLevelClick('easy_example')}>
           <span className="level-tag">Easy</span>
           <img src={imagepath} alt="Logo" style={{ width: '75%', height: '75%', objectFit: 'contain' }}/>
         </div>
