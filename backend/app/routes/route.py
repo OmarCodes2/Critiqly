@@ -66,7 +66,7 @@ async def sign_in(request: SignInRequest):
 async def signup(request: SignUpRequest):
     existing_user = users.find_one({"email": request.email})
     if existing_user:
-        raise ValueError("Email is in use")
+        raise HTTPException(status_code=400, detail="Email is in use")
     hashed_password = bcrypt.hashpw(request.password.encode('utf-8'), bcrypt.gensalt())
     user_data = {
         "email": request.email,
