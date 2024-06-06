@@ -3,7 +3,14 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      borderWidth: {
+        '1': '1px',
+      },
       keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
         typing: {
           "0%": {
             width: "0%",
@@ -24,6 +31,12 @@ module.exports = {
       },
       animation: {
         typing: "typing 2s steps(20) infinite alternate, blink .7s infinite"
+      },
+      dropShadow: {
+        glow: [
+          "0 0px 20px rgba(255,255, 255, 0.35)",
+          "0 0px 65px rgba(255, 255,255, 0.2)"
+        ]
       }
     },
   },
