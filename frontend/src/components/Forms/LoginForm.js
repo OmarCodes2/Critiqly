@@ -44,7 +44,14 @@ function LoginForm() {
         login(data.user);
         navigate('/dashboard');
       } else {
-        console.error('Login failed');
+        const errorData = await response.json();
+        const newErrors = { ...formErrors };
+        if (errorData.detail === 'Sign in failed.') {
+          newErrors.password = 'Email or password are incorrect';
+        } else {
+          newErrors.password = 'Please try again later';
+        }
+        setErrors(newErrors);
       }
     } catch (error) {
       console.error('An error occurred:', error);
