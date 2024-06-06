@@ -46,7 +46,14 @@ function SignUpForm() {
       if (response.ok) {
         navigate('/login');
       } else {
-        console.error('Sign up failed');
+        const errorData = await response.json();
+        const newErrors = { ...formErrors };
+        if (errorData.detail === 'Email is in use') {
+          newErrors.email = 'Email is already in use';
+        } else {
+          console.error('Sign up failed');
+        }
+        setErrors(newErrors);
       }
     } catch (error) {
       console.error('An error occurred:', error);
