@@ -7,6 +7,10 @@ module.exports = {
         '1': '1px',
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
         marquee: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' },
@@ -30,7 +34,8 @@ module.exports = {
         }
       },
       animation: {
-        typing: "typing 2s steps(20) infinite alternate, blink .7s infinite"
+        typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",
+        fadeIn: 'fadeIn 2s ease-in-out forwards',
       },
       dropShadow: {
         glow: [
