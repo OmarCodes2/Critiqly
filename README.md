@@ -250,4 +250,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For more information, please contact the maintainers at [email@example.com](mailto:omarcodes2@gmail.com).
+For more information, please contact the maintainers at [omarcodes2@gmail.com](mailto:omarcodes2@gmail.com).
